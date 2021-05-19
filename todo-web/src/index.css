@@ -1,0 +1,23 @@
+body {
+  background: #157d71;
+  color: #fff;
+  font-family: monospace;
+}
+
+button,
+input {
+  font-family: monospace;
+}
+
+li {
+  display: flex;
+  align-items: center;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.hidden {
+  display: none;
+}
