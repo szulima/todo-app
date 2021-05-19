@@ -127,6 +127,7 @@ export default function App() {
             type="text"
             value={input}
             placeholder=">what do we do?"
+            autoFocus
             onChange={handleInputChange}
             onKeyDown={handleAddItemClick}
           />
