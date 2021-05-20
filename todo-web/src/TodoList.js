@@ -9,7 +9,7 @@ function TodoItem({ item, handleRemoveItem, handleToggleDone, showDone }) {
       <li className={`${done} ${hide}`}>
         <input
           type="checkbox"
-          checked={!!item.done}
+          defaultChecked={!!item.done}
           onClick={() => handleToggleDone(item.id)}
         />
         <Link to={`/${item.id}`}>

@@ -110,7 +110,7 @@ export default function App() {
           <label htmlFor="showDone">
             <input
               type="checkbox"
-              checked={!!showDone}
+              defaultChecked={!!showDone}
               id="showDone"
               onClick={handleToggleShowDone}
             />
