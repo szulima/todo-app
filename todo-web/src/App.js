@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import TodoList from "./TodoList";
 import { Switch, Route, useParams, Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { tasksState } from "./atoms";
 
 function ItemDetails({ todoItems }) {
   const { id } = useParams();
@@ -21,20 +23,7 @@ function ItemDetails({ todoItems }) {
 
 export default function App() {
   const [input, setInput] = useState("");
-  const [todoItems, setTodoItems] = useState([
-    {
-      id: 1,
-      task: "climb a tree",
-      done: false,
-      created: new Date(),
-    },
-    {
-      id: 2,
-      task: "code app",
-      done: false,
-      created: new Date(),
-    },
-  ]);
+  const [todoItems, setTodoItems] = useRecoilState(tasksState);
   const [showDone, setShowDone] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -49,7 +38,7 @@ export default function App() {
   function handleAddItemClick(e) {
     if (e.code !== "Enter" && e.type !== "click") return;
     const newId = assignId();
-    setTodoItems([
+    setTodoItems((todoItems) => [
       ...todoItems,
       {
         id: newId,
@@ -66,15 +55,20 @@ export default function App() {
   }
 
   function handleRemoveItem(id) {
-    setTodoItems(todoItems.filter((item) => item.id !== id));
+    setTodoItems((todoItems) => todoItems.filter((item) => item.id !== id));
   }
 
   function handleToggleDone(id) {
-    let newTodoItems = [...todoItems];
-    let item = newTodoItems.find((i) => i.id === id);
-    item.done = !item.done;
-    setTodoItems(newTodoItems);
-    // e.target.checked = !e.target.checked;
+    setTodoItems((todoItems) => {
+      const item = todoItems.find((item) => item.id === id);
+      const index = todoItems.findIndex((item) => item.id === id);
+      const newTodoItems = [
+        ...todoItems.slice(0, index),
+        { ...item, done: !item.done },
+        ...todoItems.slice(index + 1),
+      ];
+      return newTodoItems;
+    });
   }
 
   function handleToggleShowDone(e) {
@@ -110,7 +104,7 @@ export default function App() {
           <label htmlFor="showDone">
             <input
               type="checkbox"
-              defaultChecked={!!showDone}
+              // checked={!!showDone}
               id="showDone"
               onClick={handleToggleShowDone}
             />
