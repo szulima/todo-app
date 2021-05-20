@@ -1,25 +1,9 @@
 import React, { useState } from "react";
 import TodoList from "./TodoList";
-import { Switch, Route, useParams, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { tasksState } from "./atoms";
-
-function ItemDetails({ todoItems }) {
-  const { id } = useParams();
-  const item = todoItems.find((i) => i.id === Number(id));
-
-  return (
-    <>
-      <Link to="/">{"< Go back"}</Link>
-      <h1>{item.task}</h1>
-      <p>
-        created: {item.created.toLocaleDateString()}{" "}
-        {item.created.toLocaleTimeString()}
-      </p>
-      <p>done: {item.done ? "yes!" : "not yet"}</p>
-    </>
-  );
-}
+import ItemPage from "./ItemPage";
 
 export default function App() {
   const [input, setInput] = useState("");
@@ -132,7 +116,8 @@ export default function App() {
         </Route>
 
         <Route path="/:id">
-          <ItemDetails todoItems={todoItems} />
+          {/* <ItemDetails todoItems={todoItems} /> */}
+          <ItemPage />
         </Route>
       </Switch>
     </>
