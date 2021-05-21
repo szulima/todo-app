@@ -9,7 +9,6 @@ export default function ShowDoneTask() {
     e.target.checked ? setShowDone(true) : setShowDone(false);
   }
 
-  // check checkbox on mount if showDone
   useEffect(() => {
     const showDoneCheckbox = document.querySelector(".showDoneCheckbox");
     showDoneCheckbox.checked = showDone ? true : false;

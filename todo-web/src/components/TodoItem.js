@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { tasksState, showDoneState } from "../atoms";
 
 export default function TodoItem({ task }) {
   const setTasks = useSetRecoilState(tasksState);
+  // const [tasks, setTasks] = useRecoilState(tasksState);
   const showDone = useRecoilValue(showDoneState);
 
   function handleRemoveItem(id) {
@@ -22,6 +23,15 @@ export default function TodoItem({ task }) {
       return newTodoItems;
     });
   }
+
+  // useEffect(() => {
+  //   const doneCheckbox = document.querySelector(".doneCheckbox");
+  //   // const item = tasks.find((i) => i.id === task.id);
+  //   // console.log(item);
+  //   // console.log(task.done, item.done, doneCheckbox.checked);
+  //   doneCheckbox.checked = task.done ? true : false;
+  //   // console.log(doneCheckbox);
+  // });
 
   const done = task.done ? "done" : "";
   const hide = task.done && !showDone ? "hidden" : "";
