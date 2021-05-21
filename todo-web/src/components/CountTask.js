@@ -5,7 +5,7 @@ export default function CountTask() {
   const tasks = useRecoilValue(tasksState);
   const taskCount = tasks.length;
   const taskDoneCount = tasks.reduce(
-    (total, item) => (item.done ? (total += 1) : total),
+    (total, item) => (item.done ? total++ : total),
     0
   );
   return (

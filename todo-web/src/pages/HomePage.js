@@ -3,39 +3,12 @@ import { useRecoilState } from "recoil";
 import { tasksState } from "../atoms";
 import TodoList from "../components/TodoList";
 import CountTask from "../components/CountTask";
+import AddItem from "../components/AddItem";
 
 export default function HomePage() {
-  const [input, setInput] = useState("");
   const [todoItems, setTodoItems] = useRecoilState(tasksState);
   const [showDone, setShowDone] = useState(false);
   const [search, setSearch] = useState("");
-
-  function assignId() {
-    const maxId = todoItems.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-    return maxId + 1;
-  }
-
-  function handleAddItemClick(e) {
-    if (e.code !== "Enter" && e.type !== "click") return;
-    const newId = assignId();
-    setTodoItems((todoItems) => [
-      ...todoItems,
-      {
-        id: newId,
-        task: input,
-        done: false,
-        created: new Date(),
-      },
-    ]);
-    setInput("");
-  }
-
-  function handleInputChange(e) {
-    setInput(e.target.value);
-  }
 
   function handleRemoveItem(id) {
     setTodoItems((todoItems) => todoItems.filter((item) => item.id !== id));
@@ -90,18 +63,7 @@ export default function HomePage() {
         showDone={showDone}
         search={search}
       />
-
-      <input
-        type="text"
-        value={input}
-        placeholder=">what do we do?"
-        autoFocus
-        onChange={handleInputChange}
-        onKeyDown={handleAddItemClick}
-      />
-      <button type="submit" onClick={handleAddItemClick}>
-        add
-      </button>
+      <AddItem />
     </>
   );
 }
