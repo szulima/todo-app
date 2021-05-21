@@ -22,3 +22,8 @@ export const searchState = atom({
   key: "searchState",
   default: "",
 });
+
+export const showDoneState = atom({
+  key: "showDoneState",
+  default: false,
+});
