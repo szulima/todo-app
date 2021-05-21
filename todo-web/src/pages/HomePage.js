@@ -1,7 +1,8 @@
 import { useState } from "react";
-import TodoList from "../components/TodoList";
 import { useRecoilState } from "recoil";
 import { tasksState } from "../atoms";
+import TodoList from "../components/TodoList";
+import CountTask from "../components/CountTask";
 
 export default function HomePage() {
   const [input, setInput] = useState("");
@@ -61,18 +62,10 @@ export default function HomePage() {
     setSearch(e.target.value);
   }
 
-  const taskCount = todoItems.length;
-  const taskDoneCount = todoItems.reduce(
-    (total, item) => (item.done ? (total += 1) : total),
-    0
-  );
   return (
     <>
       <h1>TODO</h1>
-      <p>
-        TASKS: {taskCount} (DONE {taskDoneCount} / UNDONE{" "}
-        {taskCount - taskDoneCount})
-      </p>
+      <CountTask />
 
       <input
         type="search"
