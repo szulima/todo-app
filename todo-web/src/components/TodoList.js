@@ -1,25 +1,16 @@
+import { useRecoilValue } from "recoil";
+import { tasksState, searchState } from "../atoms";
 import TodoItem from "./TodoItem";
 
-export default function TodoList({
-  todoItems,
-  handleRemoveItem,
-  handleToggleDone,
-  showDone,
-  search,
-}) {
-  const filteredItems = getFilteredTasks(todoItems, search);
+export default function TodoList() {
+  const tasks = useRecoilValue(tasksState);
+  const search = useRecoilValue(searchState);
+
+  const filteredTasks = getFilteredTasks(tasks, search);
   return (
     <ul>
-      {filteredItems.map((item) => {
-        return (
-          <TodoItem
-            item={item}
-            key={item.id}
-            handleRemoveItem={handleRemoveItem}
-            handleToggleDone={handleToggleDone}
-            showDone={showDone}
-          />
-        );
+      {filteredTasks.map((task) => {
+        return <TodoItem key={task.id} task={task} />;
       })}
     </ul>
   );
