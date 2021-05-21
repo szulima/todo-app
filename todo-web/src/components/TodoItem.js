@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect } from "react";
 import { tasksState, showDoneState } from "../atoms";
 
 export default function TodoItem({ task }) {
@@ -31,6 +32,7 @@ export default function TodoItem({ task }) {
         type="checkbox"
         // defaultChecked={!!item.done}
         onClick={() => handleToggleDone()}
+        className="doneCheckbox"
       />
       <Link to={`/${task.id}`}>
         <p>{task.task}</p>
