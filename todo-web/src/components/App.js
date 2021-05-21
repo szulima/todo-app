@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import TodoList from "./TodoList";
 import { Switch, Route } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { tasksState } from "./atoms";
-import ItemPage from "./ItemPage";
+import { tasksState } from "../atoms";
+import ItemPage from "../pages/ItemPage";
 
 export default function App() {
   const [input, setInput] = useState("");
@@ -72,6 +72,7 @@ export default function App() {
     <>
       <Switch>
         <Route exact path="/">
+          {/* <HomePage /> */}
           <h1>TODO</h1>
           <p>
             TASKS: {taskCount} (DONE {taskDoneCount} / UNDONE{" "}

@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { tasksState } from "./atoms";
+import { tasksState } from "../atoms";
 
 export default function ItemPage() {
   const taskList = useRecoilValue(tasksState);
