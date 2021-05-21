@@ -17,3 +17,8 @@ export const tasksState = atom({
     },
   ],
 });
+
+export const searchState = atom({
+  key: "searchState",
+  default: "",
+});

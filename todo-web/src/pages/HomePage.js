@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { tasksState } from "../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { tasksState, searchState } from "../atoms";
 import TodoList from "../components/TodoList";
 import CountTask from "../components/CountTask";
 import AddItem from "../components/AddItem";
+import SearchTask from "../components/SearchTask";
 
 export default function HomePage() {
   const [todoItems, setTodoItems] = useRecoilState(tasksState);
   const [showDone, setShowDone] = useState(false);
-  const [search, setSearch] = useState("");
+  const search = useRecoilValue(searchState);
 
   function handleRemoveItem(id) {
     setTodoItems((todoItems) => todoItems.filter((item) => item.id !== id));
@@ -31,21 +32,11 @@ export default function HomePage() {
     e.target.checked ? setShowDone(true) : setShowDone(false);
   }
 
-  function handleSearchChange(e) {
-    setSearch(e.target.value);
-  }
-
   return (
     <>
       <h1>TODO</h1>
       <CountTask />
-
-      <input
-        type="search"
-        placeholder="⌕ Search"
-        value={search}
-        onChange={handleSearchChange}
-      />
+      <SearchTask />
 
       <label htmlFor="showDone">
         <input
