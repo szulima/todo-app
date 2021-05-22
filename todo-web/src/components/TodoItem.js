@@ -17,7 +17,7 @@ export default function TodoItem({ task }) {
       const index = tasks.findIndex((item) => item.id === task.id);
       const newTodoItems = [
         ...tasks.slice(0, index),
-        { ...task, done: !task.done },
+        { ...task, completed: !task.completed },
         ...tasks.slice(index + 1),
       ];
       return newTodoItems;
@@ -33,8 +33,8 @@ export default function TodoItem({ task }) {
   //   // console.log(doneCheckbox);
   // });
 
-  const done = task.done ? "done" : "";
-  const hide = task.done && !showDone ? "hidden" : "";
+  const done = task.completed ? "done" : "";
+  const hide = task.completed && !showDone ? "hidden" : "";
 
   return (
     <li className={`${done} ${hide}`}>
@@ -45,7 +45,7 @@ export default function TodoItem({ task }) {
         className="doneCheckbox"
       />
       <Link to={`/${task.id}`}>
-        <p>{task.task}</p>
+        <p>{task.title}</p>
       </Link>
       <button onClick={() => handleRemoveItem(task.id)}>×</button>
     </li>

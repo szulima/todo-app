@@ -10,12 +10,9 @@ export default function ItemPage() {
   return (
     <>
       <Link to="/">{"< Go back"}</Link>
-      <h1>{item.task}</h1>
-      <p>
-        created: {item.created.toLocaleDateString()}{" "}
-        {item.created.toLocaleTimeString()}
-      </p>
-      <p>done: {item.done ? "yes!" : "not yet"}</p>
+      <h1>{item.title}</h1>
+      <p>created: {item.created_at}</p>
+      <p>done: {item.completed ? "yes!" : "not yet"}</p>
     </>
   );
 }
