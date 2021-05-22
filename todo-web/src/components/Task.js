@@ -24,7 +24,23 @@ export default function Task({ task }) {
     removeTaskFromServer(id);
   }
 
-  function handleToggleDone() {
+  async function updateToggleDoneTaskOnServer(id) {
+    const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
+    await fetch(endpoint, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " +
+          "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
+      },
+      body: JSON.stringify({
+        completed: !task.completed,
+      }),
+    });
+  }
+
+  function handleToggleDone(id) {
     setTasks((tasks) => {
       const index = tasks.findIndex((item) => item.id === task.id);
       const newTasks = [
@@ -34,6 +50,7 @@ export default function Task({ task }) {
       ];
       return newTasks;
     });
+    updateToggleDoneTaskOnServer(id);
   }
 
   const done = task.completed ? "done" : "";
@@ -44,7 +61,7 @@ export default function Task({ task }) {
       <input
         type="checkbox"
         checked={task.completed}
-        onChange={() => handleToggleDone()}
+        onChange={() => handleToggleDone(task.id)}
         className="doneCheckbox"
       />
       <Link to={`/${task.id}`}>
