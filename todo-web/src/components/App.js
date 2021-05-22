@@ -40,7 +40,6 @@ export default function App() {
       const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
       const response = await fetch(endpoint);
       const { data } = await response.json();
-      console.log(data);
       setTasks(data);
     }
     fetchTasks();

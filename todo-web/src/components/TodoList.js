@@ -18,5 +18,5 @@ export default function TodoList() {
 
 function getFilteredTasks(tasks, searchInput) {
   const regex = new RegExp(searchInput, "i");
-  return tasks.filter((item) => regex.test(item.task));
+  return tasks.filter((task) => regex.test(task.title));
 }

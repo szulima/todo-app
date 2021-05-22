@@ -11,8 +11,9 @@ export default function ItemPage() {
     <>
       <Link to="/">{"< Go back"}</Link>
       <h1>{item.title}</h1>
-      <p>created: {item.created_at}</p>
       <p>done: {item.completed ? "yes!" : "not yet"}</p>
+      <p>created: {item.created_at}</p>
+      <p>updated: {item.updated_at}</p>
     </>
   );
 }

@@ -1,18 +1,10 @@
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { tasksState } from "../atoms";
 
 export default function AddItem() {
-  const [tasks, setTasks] = useRecoilState(tasksState);
+  const setTasks = useSetRecoilState(tasksState);
   const [input, setInput] = useState("");
-
-  // function assignId() {
-  //   const maxId = tasks.reduce(
-  //     (max, item) => (item.id > max ? item.id : max),
-  //     0
-  //   );
-  //   return maxId + 1;
-  // }
 
   async function handleAddItemClick(e) {
     if (e.code !== "Enter" && e.type !== "click") return;
@@ -36,9 +28,7 @@ export default function AddItem() {
       return response.data;
     }
     const task = await postTask();
-    console.log(task);
 
-    // const newId = assignId();
     setTasks((todoItems) => [
       ...todoItems,
       {
