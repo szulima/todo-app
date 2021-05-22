@@ -8,22 +8,22 @@ export default function Task({ task }) {
   // const [tasks, setTasks] = useRecoilState(tasksState);
   const showDone = useRecoilValue(showDoneState);
 
-  function handleRemoveTask(id) {
-    async function removeTaskFromServer() {
-      const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
-      await fetch(endpoint, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer " +
-            "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
-        },
-      });
-    }
+  async function removeTaskFromServer(id) {
+    const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
+    await fetch(endpoint, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer " +
+          "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
+      },
+    });
+  }
 
+  function handleRemoveTask(id) {
     setTasks((tasks) => tasks.filter((task) => task.id !== id));
-    removeTaskFromServer();
+    removeTaskFromServer(id);
   }
 
   function handleToggleDone() {
@@ -54,8 +54,8 @@ export default function Task({ task }) {
     <li className={`${done} ${hide}`}>
       <input
         type="checkbox"
-        // defaultChecked={!!item.done}
-        onClick={() => handleToggleDone()}
+        checked={task.completed}
+        onChange={() => handleToggleDone()}
         className="doneCheckbox"
       />
       <Link to={`/${task.id}`}>

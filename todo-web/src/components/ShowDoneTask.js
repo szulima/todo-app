@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { showDoneState } from "../atoms";
 
@@ -9,17 +8,13 @@ export default function ShowDoneTask() {
     e.target.checked ? setShowDone(true) : setShowDone(false);
   }
 
-  useEffect(() => {
-    const showDoneCheckbox = document.querySelector(".showDoneCheckbox");
-    showDoneCheckbox.checked = showDone ? true : false;
-  }, [showDone]);
-
   return (
     <label htmlFor="showDone">
       <input
         type="checkbox"
         id="showDone"
-        onClick={handleToggleShowDone}
+        checked={showDone}
+        onChange={handleToggleShowDone}
         className="showDoneCheckbox"
       />
       Show done
