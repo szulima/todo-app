@@ -2,7 +2,7 @@ import { useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { tasksState } from "../atoms";
 
-export default function AddItem() {
+export default function AddTask() {
   const setTasks = useSetRecoilState(tasksState);
   const [input, setInput] = useState("");
 

@@ -3,24 +3,24 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 // import { useEffect } from "react";
 import { tasksState, showDoneState } from "../atoms";
 
-export default function TodoItem({ task }) {
+export default function Task({ task }) {
   const setTasks = useSetRecoilState(tasksState);
   // const [tasks, setTasks] = useRecoilState(tasksState);
   const showDone = useRecoilValue(showDoneState);
 
-  function handleRemoveItem(id) {
-    setTasks((tasks) => tasks.filter((item) => item.id !== id));
+  function handleRemoveTask(id) {
+    setTasks((tasks) => tasks.filter((task) => task.id !== id));
   }
 
   function handleToggleDone() {
     setTasks((tasks) => {
       const index = tasks.findIndex((item) => item.id === task.id);
-      const newTodoItems = [
+      const newTasks = [
         ...tasks.slice(0, index),
         { ...task, completed: !task.completed },
         ...tasks.slice(index + 1),
       ];
-      return newTodoItems;
+      return newTasks;
     });
   }
 
@@ -47,7 +47,7 @@ export default function TodoItem({ task }) {
       <Link to={`/${task.id}`}>
         <p>{task.title}</p>
       </Link>
-      <button onClick={() => handleRemoveItem(task.id)}>×</button>
+      <button onClick={() => handleRemoveTask(task.id)}>×</button>
     </li>
   );
 }

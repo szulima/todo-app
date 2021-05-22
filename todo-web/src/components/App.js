@@ -21,10 +21,10 @@ export default function App() {
   //         "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
   //     },
   //     body: JSON.stringify({
-  //       name: "Jan Jansen",
+  //       name: "Minsc",
   //       gender: "Male",
-  //       email: "jjansen@bg.com",
-  //       status: "Active",
+  //       email: "minsc@bg.com",
+  //       status: "Active"
   //     }),
   //   })
   //     .then((response) => response.json())

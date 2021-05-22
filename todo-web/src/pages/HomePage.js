@@ -1,6 +1,6 @@
-import TodoList from "../components/TodoList";
+import TaskList from "../components/TaskList";
 import CountTask from "../components/CountTask";
-import AddItem from "../components/AddItem";
+import AddTask from "../components/AddTask";
 import SearchTask from "../components/SearchTask";
 import ShowDoneTask from "../components/ShowDoneTask";
 
@@ -11,8 +11,8 @@ export default function HomePage() {
       <CountTask />
       <SearchTask />
       <ShowDoneTask />
-      <TodoList />
-      <AddItem />
+      <TaskList />
+      <AddTask />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { tasksState, searchState } from "../atoms";
-import TodoItem from "./TodoItem";
+import Task from "./Task";
 
 export default function TodoList() {
   const tasks = useRecoilValue(tasksState);
@@ -10,7 +10,7 @@ export default function TodoList() {
   return (
     <ul>
       {filteredTasks.map((task) => {
-        return <TodoItem key={task.id} task={task} />;
+        return <Task key={task.id} task={task} />;
       })}
     </ul>
   );
