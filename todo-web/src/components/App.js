@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import { Switch, Route } from "react-router-dom";
-import { tasksState, userIdState } from "../atoms";
+import { tasksState, userIdState, loadingState } from "../atoms";
 import HomePage from "../pages/HomePage";
 import ItemPage from "../pages/ItemPage";
 
 export default function App() {
   const setTasks = useSetRecoilState(tasksState);
   const [userId, setUserId] = useRecoilState(userIdState);
+  const setLoading = useSetRecoilState(loadingState);
 
   // create new user on gorest.co.in if the old one has been removed
   // useEffect(() => {
@@ -37,10 +38,12 @@ export default function App() {
 
   useEffect(() => {
     async function fetchTasks() {
+      setLoading(true);
       const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
       const response = await fetch(endpoint);
       const { data } = await response.json();
       setTasks(data);
+      setLoading(false);
     }
     fetchTasks();
   }, []);
