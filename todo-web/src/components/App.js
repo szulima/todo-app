@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 import { Switch, Route } from "react-router-dom";
-import { tasksState } from "../atoms";
+import { tasksState, userIdState } from "../atoms";
 import HomePage from "../pages/HomePage";
 import ItemPage from "../pages/ItemPage";
 
 export default function App() {
   const setTasks = useSetRecoilState(tasksState);
-  let userId = 1645;
+  const [userId, setUserId] = useRecoilState(userIdState);
 
   // create new user on gorest.co.in if the old one has been removed
   // useEffect(() => {
