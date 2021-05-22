@@ -36,15 +36,16 @@ export default function App() {
   //     .catch((err) => console.log(err));
   // });
 
+  async function fetchTasks() {
+    setLoading(true);
+    const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
+    const response = await fetch(endpoint);
+    const { data } = await response.json();
+    setTasks(data);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    async function fetchTasks() {
-      setLoading(true);
-      const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
-      const response = await fetch(endpoint);
-      const { data } = await response.json();
-      setTasks(data);
-      setLoading(false);
-    }
     fetchTasks();
   }, []);
 
