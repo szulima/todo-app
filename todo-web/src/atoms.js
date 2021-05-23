@@ -15,10 +15,9 @@ export const showDoneState = atom({
   default: true,
 });
 
-// RMEOVE THIS ATOM if it turns out unnecessary
 export const userIdState = atom({
   key: "userIdState",
-  default: 1645,
+  default: 11379,
 });
 
 export const loadingState = atom({

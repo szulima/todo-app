@@ -1,16 +1,18 @@
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useState } from "react";
-import { tasksState } from "../atoms";
+import { tasksState, userIdState } from "../atoms";
 
 export default function AddTask() {
   const setTasks = useSetRecoilState(tasksState);
   const [input, setInput] = useState("");
+  const userId = useRecoilValue(userIdState);
 
   async function handleAddItemClick(e) {
     if (e.code !== "Enter" && e.type !== "click") return;
 
     async function postTask() {
-      const endpoint = "https://gorest.co.in/public-api/users/1645/todos";
+      // console.log("post task:", userId);
+      const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
       const promise = await fetch(endpoint, {
         method: "POST",
         headers: {
