@@ -1,21 +1,22 @@
 import { useEffect } from "react";
-import { useSetRecoilState, useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { Switch, Route } from "react-router-dom";
 import { tasksState, userIdState, loadingState } from "../atoms";
 import HomePage from "../pages/HomePage";
-import ItemPage from "../pages/ItemPage";
+import TaskPage from "../pages/TaskPage";
 
 export default function App() {
   const setTasks = useSetRecoilState(tasksState);
-  const [userId, setUserId] = useRecoilState(userIdState);
+  const setUserId = useSetRecoilState(userIdState);
   const setLoading = useSetRecoilState(loadingState);
 
   async function doesUserExist() {
     setLoading(true);
-    const endpoint = `https://gorest.co.in/public-api/users/${userId}`;
+    const endpoint = `https://gorest.co.in/public-api/users?email=minscandboo@bg.com`;
     const responsePromise = await fetch(endpoint);
-    const data = await responsePromise.json();
-    return data.code;
+    const dataObject = await responsePromise.json();
+    const oldUser = dataObject.data[0] ? dataObject.data[0] : null;
+    return oldUser;
   }
 
   async function createNewUser() {
@@ -29,22 +30,20 @@ export default function App() {
           "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
       },
       body: JSON.stringify({
-        name: "Jaheira",
-        gender: "Female",
-        email: "jaheira2@bg.com",
+        name: "Minsc",
+        gender: "Male",
+        email: "minscandboo@bg.com",
         status: "Active",
       }),
     });
     const dataObject = await promise.json();
-    console.log("newly created user id", dataObject.data.id);
-    setUserId((userId) => dataObject.data.id);
-    console.log("userId value was changed to: ", userId);
+    const newUser = dataObject.data;
+    return newUser;
   }
 
-  async function fetchTasks() {
-    console.log("fetch tasks user id ", userId);
+  async function fetchTasks(user) {
     setLoading(true);
-    const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
+    const endpoint = `https://gorest.co.in/public-api/users/${user.id}/todos`;
     const response = await fetch(endpoint);
     const { data } = await response.json();
     setTasks(data);
@@ -53,9 +52,10 @@ export default function App() {
 
   useEffect(() => {
     async function fetchData() {
-      const code = await doesUserExist();
-      if (code === 404) await createNewUser();
-      await fetchTasks();
+      let user = await doesUserExist();
+      if (!user) user = await createNewUser();
+      await fetchTasks(user);
+      setUserId(user.id);
     }
     fetchData();
   }, []);
@@ -68,7 +68,7 @@ export default function App() {
         </Route>
 
         <Route path="/:id">
-          <ItemPage />
+          <TaskPage />
         </Route>
       </Switch>
     </>
