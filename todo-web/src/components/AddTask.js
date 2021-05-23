@@ -12,7 +12,6 @@ export default function AddTask() {
     if (!input) return;
 
     async function postTask() {
-      // console.log("post task:", userId);
       const endpoint = `https://gorest.co.in/public-api/users/${userId}/todos`;
       const promise = await fetch(endpoint, {
         method: "POST",
