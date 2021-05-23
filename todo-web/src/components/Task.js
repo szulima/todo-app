@@ -2,35 +2,6 @@ import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { tasksState, showDoneState } from "../atoms";
 
-async function removeTaskFromServer(id) {
-  const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
-  await fetch(endpoint, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer " +
-        "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
-    },
-  });
-}
-
-async function updateToggleDoneTaskOnServer(task, id) {
-  const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
-  await fetch(endpoint, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer " +
-        "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
-    },
-    body: JSON.stringify({
-      completed: !task.completed,
-    }),
-  });
-}
-
 export default function Task({ task }) {
   const setTasks = useSetRecoilState(tasksState);
   const showDone = useRecoilValue(showDoneState);
@@ -70,4 +41,33 @@ export default function Task({ task }) {
       <button onClick={() => handleRemoveTask(task.id)}>×</button>
     </li>
   );
+}
+
+async function removeTaskFromServer(id) {
+  const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
+  await fetch(endpoint, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " +
+        "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
+    },
+  });
+}
+
+async function updateToggleDoneTaskOnServer(task, id) {
+  const endpoint = `https://gorest.co.in/public-api/todos/${id}`;
+  await fetch(endpoint, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer " +
+        "e24613527fa0a33f38c3f650049c4bd6876276dd89530c4ab3dbe590576bfaf9",
+    },
+    body: JSON.stringify({
+      completed: !task.completed,
+    }),
+  });
 }
