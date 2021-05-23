@@ -9,6 +9,7 @@ export default function AddTask() {
 
   async function handleAddItemClick(e) {
     if (e.code !== "Enter" && e.type !== "click") return;
+    if (!input) return;
 
     async function postTask() {
       // console.log("post task:", userId);
