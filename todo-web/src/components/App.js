@@ -11,7 +11,6 @@ export default function App() {
   const setLoading = useSetRecoilState(loadingState);
 
   async function doesUserExist() {
-    setLoading(true);
     const endpoint = `https://gorest.co.in/public-api/users?email=minscandboo@bg.com`;
     const responsePromise = await fetch(endpoint);
     const dataObject = await responsePromise.json();
@@ -42,20 +41,21 @@ export default function App() {
   }
 
   async function fetchTasks(user) {
-    setLoading(true);
     const endpoint = `https://gorest.co.in/public-api/users/${user.id}/todos`;
     const response = await fetch(endpoint);
     const { data } = await response.json();
-    setTasks(data);
-    setLoading(false);
+    return data;
   }
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true);
       let user = await doesUserExist();
       if (!user) user = await createNewUser();
-      await fetchTasks(user);
+      const tasks = await fetchTasks(user);
+      setTasks(tasks);
       setUserId(user.id);
+      setLoading(false);
     }
     fetchData();
   }, []);
