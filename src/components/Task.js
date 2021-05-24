@@ -48,7 +48,10 @@ export default function Task({ task }) {
           />
         </label>
         <Link to={`/${task.id}`} sx={{ textDecoration: "none" }}>
-          <p className={done} sx={{ textTransform: "uppercase", pl: "10px" }}>
+          <p
+            className={done}
+            sx={{ textTransform: "uppercase", pl: "10px", color: "primary" }}
+          >
             {task.title}
           </p>
         </Link>

@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { useParams, Link } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { tasksState } from "../atoms";
@@ -9,7 +10,9 @@ export default function TaskPage() {
 
   return (
     <>
-      <Link to="/">{"< Go back"}</Link>
+      <Link to="/" sx={{ color: "#fff" }}>
+        {"< Go back"}
+      </Link>
 
       <h1>{task.title}</h1>
       <p>done: {task.completed ? "yes!" : "not yet"}</p>
