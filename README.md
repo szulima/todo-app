@@ -1,4 +1,4 @@
-# WIP Celadon Todo App
+# Celadon Todo App
 
 Lista TODO w React.js z CRUD.
 Wymagania:
