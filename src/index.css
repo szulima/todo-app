@@ -1,6 +1,4 @@
 body {
-  background: #157d71;
-  color: #fff;
   font-family: monospace;
 }
 
@@ -9,9 +7,9 @@ input {
   font-family: monospace;
 }
 
-li {
-  display: flex;
-  align-items: center;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
 .done {

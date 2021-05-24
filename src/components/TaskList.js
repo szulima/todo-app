@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+import { Container } from "theme-ui";
 import { useRecoilValue } from "recoil";
 import { tasksState, searchState, loadingState } from "../atoms";
 import Task from "./Task";
@@ -10,15 +12,17 @@ export default function TodoList() {
   const filteredTasks = getFilteredTasks(tasks, search);
   return (
     <>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {filteredTasks.map((task) => {
-            return <Task key={task.id} task={task} />;
-          })}
-        </ul>
-      )}
+      <Container variant="ul">
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <ul>
+            {filteredTasks.map((task) => {
+              return <Task key={task.id} task={task} />;
+            })}
+          </ul>
+        )}
+      </Container>
     </>
   );
 }

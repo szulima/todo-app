@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+import { Container, Button } from "theme-ui";
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { tasksState, showDoneState } from "../atoms";
@@ -28,17 +30,35 @@ export default function Task({ task }) {
   const hide = task.completed && !showDone ? "hidden" : "";
 
   return (
-    <li className={`${done} ${hide}`}>
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => handleToggleDone(task.id)}
-        className="doneCheckbox"
-      />
-      <Link to={`/${task.id}`}>
-        <p>{task.title}</p>
-      </Link>
-      <button onClick={() => handleRemoveTask(task.id)}>×</button>
+    <li className={`${hide}`}>
+      <Container variant="li">
+        <label
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            bg: "secondary",
+          }}
+        >
+          <input
+            type="checkbox"
+            checked={task.completed}
+            onChange={() => handleToggleDone(task.id)}
+            className="doneCheckbox"
+          />
+        </label>
+        <Link to={`/${task.id}`} sx={{ textDecoration: "none" }}>
+          <p className={done} sx={{ textTransform: "uppercase", pl: "10px" }}>
+            {task.title}
+          </p>
+        </Link>
+        <Button
+          onClick={() => handleRemoveTask(task.id)}
+          sx={{ fontSize: 2, bg: "red" }}
+        >
+          ×
+        </Button>
+      </Container>
     </li>
   );
 }

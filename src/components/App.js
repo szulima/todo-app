@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+import { Container } from "theme-ui";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { Switch, Route } from "react-router-dom";
@@ -27,11 +29,15 @@ export default function App() {
     <>
       <Switch>
         <Route exact path="/">
-          <HomePage />
+          <Container>
+            <HomePage />
+          </Container>
         </Route>
 
         <Route path="/:id">
-          <TaskPage />
+          <Container>
+            <TaskPage />
+          </Container>
         </Route>
       </Switch>
     </>

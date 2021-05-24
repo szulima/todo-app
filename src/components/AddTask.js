@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+import { Container, Button } from "theme-ui";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useState } from "react";
 import { tasksState, userIdState } from "../atoms";
@@ -50,17 +52,25 @@ export default function AddTask() {
 
   return (
     <>
-      <input
-        type="text"
-        value={input}
-        placeholder=">what do we do?"
-        autoFocus
-        onChange={handleInputChange}
-        onKeyDown={handleAddItemClick}
-      />
-      <button type="submit" onClick={handleAddItemClick}>
-        add
-      </button>
+      <Container variant="addItem">
+        <input
+          type="text"
+          value={input}
+          placeholder=">what do we do?"
+          autoFocus
+          onChange={handleInputChange}
+          onKeyDown={handleAddItemClick}
+          sx={{ zIndex: 2, marginRight: "5px" }}
+        />
+        <Button
+          type="submit"
+          onClick={handleAddItemClick}
+          variant="add"
+          sx={{ fontSize: 2 }}
+        >
+          +
+        </Button>
+      </Container>
     </>
   );
 }
