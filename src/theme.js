@@ -88,6 +88,9 @@ export const theme = {
       color: "primary",
       textDecoration: "none",
     },
+    ul: {
+      listStyleType: "none",
+    },
   },
   layout: {
     container: {
@@ -101,6 +104,7 @@ export const theme = {
       bg: "#fff",
       color: "secondary",
       minHeight: "300px",
+      listStyleType: "none",
     },
     li: {
       display: "grid",

@@ -58,9 +58,10 @@ export default function AddTask() {
           value={input}
           placeholder=">what do we do?"
           autoFocus
+          maxLength="200"
           onChange={handleInputChange}
           onKeyDown={handleAddItemClick}
-          sx={{ zIndex: 2, marginRight: "5px" }}
+          sx={{ marginRight: "5px" }}
         />
         <Button
           type="submit"
